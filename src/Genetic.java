@@ -1,4 +1,10 @@
 //import java.time.Instant;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,11 +34,14 @@ public class Genetic {
         Chromosome maximumBest =new Chromosome(customers, towerSet, TOWER_LOCATIONS_SIZE);
         maximumBestFitness = maximumBest.getFitness();
         System.out.println("max best: "+maximumBestFitness);
-
+//        printImage(maximumBest, "C:\\Users\\DankSide\\Desktop\\AllTowers.bmp");
+        printImage(maximumBest, "AllTowers.bmp");
 //        test();
 
         runThreads(TRY_NUMBER);
 //        computeWithLoop(TRY_NUMBER);
+
+
     }
 
     public static void test(){
@@ -62,7 +71,6 @@ public class Genetic {
                 e.printStackTrace();
             }
         }
-        System.out.println("hello");
         int absouluteBest = 0;
         Chromosome absoluteBestChromosome = null;
         for(int i = 0; i < threadCases.length; i++){
@@ -71,6 +79,8 @@ public class Genetic {
                 absoluteBestChromosome = bestChromosomes[i];
             }
         }
+//        printImage(absoluteBestChromosome,"C:\\Users\\DankSide\\Desktop\\SelectedTowers.bmp" );
+        printImage(absoluteBestChromosome,"SelectedTowers.bmp" );
 
         System.out.println("Absolute best fitness is: "+absouluteBest);
         System.out.println((double)absouluteBest/maximumBestFitness);
@@ -218,6 +228,65 @@ public class Genetic {
             }
         });
         return chromosomes;
+    }
+
+    private static BufferedImage map( int sizeX, int sizeY, Chromosome chromosome ){
+        final BufferedImage res = new BufferedImage( sizeX, sizeY, BufferedImage.TYPE_INT_RGB );
+        for (int x = 0; x < sizeX; x++){
+            for (int y = 0; y < sizeY; y++){
+                res.setRGB(x, y, Color.GRAY.getRGB() );
+            }
+        }
+        Graphics2D g = (Graphics2D) res.getGraphics();
+        g.setColor(Color.RED);
+        g.setBackground(Color.RED);
+        for(SignalTower tower : chromosome.getSignalTowers()){
+            int x = (int)Math.floor(tower.getLocation().getX());
+            int y = (int)Math.floor(tower.getLocation().getY());
+            try {
+                res.setRGB(x,y,Color.RED.getRGB());
+                g.drawOval(x - RADIUS/2, y -RADIUS/2, RADIUS*2, RADIUS*2);
+            }catch (Exception e){
+//                e.printStackTrace();
+                System.out.println(e.getMessage());
+                System.out.println(x);
+                System.out.println(y);
+            }
+        }
+        for (Customer customer : customers){
+            int x = (int)Math.floor(customer.getLocation().getX());
+            int y = (int)Math.floor(customer.getLocation().getY());
+            try {
+                res.setRGB(x,y,Color.BLUE.getRGB());
+            }catch (Exception e){
+//                e.printStackTrace();
+                System.out.println(e.getMessage());
+                System.out.println(x);
+                System.out.println(y);
+            }
+
+        }
+//        Graphics2D g = (Graphics2D) res.getGraphics();
+//        g.setColor(Color.RED);
+//        g.setBackground(Color.RED);
+//        g.drawOval(30,30,15,15);
+        return res;
+    }
+
+    private static void savePNG( final BufferedImage bi, final String path ){
+        try {
+            RenderedImage rendImage = bi;
+            ImageIO.write(rendImage, "bmp", new File(path));
+//            ImageIO.write(rendImage, "PNG", new File(path));
+            //ImageIO.write(rendImage, "jpeg", new File(path));
+        } catch ( IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void printImage(Chromosome chromosome, String location){
+        BufferedImage img = map( X, Y , chromosome);
+        savePNG( img, location );
     }
 
 }
