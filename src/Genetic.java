@@ -245,7 +245,7 @@ public class Genetic {
             int y = (int)Math.floor(tower.getLocation().getY());
             try {
                 res.setRGB(x,y,Color.RED.getRGB());
-                g.drawOval(x - RADIUS/2, y -RADIUS/2, RADIUS*2, RADIUS*2);
+                g.drawOval(x - RADIUS, y -RADIUS, RADIUS*2, RADIUS*2);
             }catch (Exception e){
 //                e.printStackTrace();
                 System.out.println(e.getMessage());
