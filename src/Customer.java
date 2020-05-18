@@ -1,3 +1,7 @@
+/**
+ * Hesaplamalarımızın hepsinde kapsanıp kapsanmadığı fitness değerlerini belirleyecek müşyeriler için basit bir sınıf
+ */
+
 public class Customer {
     private int no;
     private Location location;

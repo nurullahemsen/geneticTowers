@@ -1,3 +1,7 @@
+/**
+ * Kromozomların içnde belirli kombinasyonlarda tutulacak basit baz istasyonu objesi.
+ */
+
 public class SignalTower implements Comparable<SignalTower>{
     private int index;
     private String name;

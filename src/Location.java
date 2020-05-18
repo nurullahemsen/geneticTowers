@@ -1,5 +1,10 @@
 import java.util.Random;
 
+/**
+ * Hem Baz istasyonlarında hemde müşterilerde kullanılacak x ve y eksenine sahip, birbiri arasındaki uzaklığı bulabilen
+ * basit bir konum sınıfı.
+ */
+
 public class Location {
     private double x;
     private double y;

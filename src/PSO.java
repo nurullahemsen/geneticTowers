@@ -180,12 +180,14 @@ public class PSO {
                 System.out.println(x);
                 System.out.println(y);
             }
-        }
+        }g.setColor(Color.BLUE);
+        g.setBackground(Color.BLUE);
         for (Customer customer : customers) {
             int x = (int) Math.floor(customer.getLocation().getX());
             int y = (int) Math.floor(customer.getLocation().getY());
             try {
-                res.setRGB(x, y, Color.BLUE.getRGB());
+//                res.setRGB(x, y, Color.BLUE.getRGB());
+                g.drawOval(x - 1, y -1, 2, 2);
             } catch (Exception e) {
 //                e.printStackTrace();
                 System.out.println(e.getMessage());

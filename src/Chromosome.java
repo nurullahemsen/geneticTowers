@@ -3,6 +3,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
+/**
+ * Tüm genetik algoritmanın temelinde bulunan cross over ve mutation a tabi tutulan fitness değeri bulunan bir
+ * kromozom sınıfı.
+ */
+
 public class Chromosome {
     private int fitness;
 
@@ -10,7 +15,15 @@ public class Chromosome {
     private ArrayList<SignalTower> unusedSignalTowers;
     private ArrayList<Customer> customers;
 
-
+    /**
+     * Parametrelerde aldığı değişkenlere göre random bir baz istasyonu listesi oluştutu ve bu liste ile birlikte
+     * müşterilerin kapsanma sayısına göre hemen bir fitness değeri belirler. Ayrıca kullanılmamış baz istasyonları da
+     * ayrı biir alanda tutulur.
+     *
+     * @param customers fitess değeri belirlenebilmesi için o anki müşteri listesi
+     * @param signalTowers imkan dahilindeki tüm baz istasyonlarının listesi
+     * @param actualNumber baz istasyonları içinden kaç tanesinin kromozomlarda tutulacağı
+     */
 
     public Chromosome(ArrayList<Customer> customers, ArrayList<SignalTower> signalTowers, int actualNumber){
         Collections.shuffle(signalTowers);
@@ -32,6 +45,14 @@ public class Chromosome {
         this.fitness = this.computeFitness();
     }
 
+    /**
+     * Verilen probability e göre bir kromozomdaki random bir baz istasyonu kullanılmayan baz istasyonları listesinden
+     * random biriyle değiştirilir.
+     *
+     * @param probability mutasyon ihtimal değeri
+     * @return mutasyona uğramış veya uğramamış kromozomu döndürür.
+     */
+
     public Chromosome mutate(double probability){
         Random random =  new Random();
         try {
@@ -52,6 +73,16 @@ public class Chromosome {
 
         return this;
     }
+
+    /**
+     * Cross over da eşlenecek kromozomların baz istason listeleri eleman tekrarı olmayacak bir şekilde birleştirilir,
+     * bu liste karıştırılır ve kromozom liste uzunluğu kadar ilk eleman alınır.
+     *
+     * Baz istasyonlarının listedeki konumları sonuca etki etmeyeceğinden böyle bir eşeyleme yöntemi uygulanmıştır.
+     *
+     * @param anotherChromosome eşeylenecek diğer kromozom objesi
+     * @return ebeveyn kromozmların genlerini paylaşan birbirinden farklı iki adet yeni kromozom
+     */
 
     public Chromosome[] crossover(Chromosome anotherChromosome){
         Chromosome[] products = new Chromosome[2];
@@ -75,6 +106,13 @@ public class Chromosome {
         return products;
 
     }
+
+    /**
+     * Bir koromozomun oluşturulmasıyla birlikte toplam kapsanan müşteri sayısının bulan fonksiyon. Bir müşteri bir kez
+     * kapsanınca başka baz istasyonları ile bir defa daha kapsansa dahi artık kapsananalar sayısı arttırılmaz.
+     *
+     * @return kapsanan müşteri sayısı
+     */
 
     public int computeFitness(){
         int count = 0;
