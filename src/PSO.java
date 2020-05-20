@@ -123,7 +123,7 @@ public class PSO {
     static Particle bestParticle(ArrayList<Particle> particles) {
 
         Particle b = particles.get(0);
-        for (int i = 1; i < particles.size(); i++) {
+        for (int i = 0; i < particles.size(); i++) {
 
             if (particles.get(i).computeFitness() > b.computeFitness()) {
                 b = particles.get(i);
@@ -137,7 +137,7 @@ public class PSO {
 
         System.out.println("Best locations of stations");
 
-        for (int i = 1; i < p.getSignalTowers().size(); i++) {
+        for (int i = 0; i < p.getSignalTowers().size(); i++) {
 
             System.out.println(p.getSignalTowers().get(i).toString());
         }
@@ -150,7 +150,7 @@ public class PSO {
 
         System.out.println("All customer locations");
 
-        for (int i = 1; i < customers.size(); i++) {
+        for (int i = 0; i < customers.size(); i++) {
 
             System.out.println(customers.get(i).toString());
         }
