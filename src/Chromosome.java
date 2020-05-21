@@ -92,17 +92,11 @@ public class Chromosome {
         }
 //        newList = sortTowerList(newList);
         Collections.shuffle(newList);
-
         ArrayList list0 = new ArrayList<SignalTower>(newList.subList(0,this.signalTowers.size()));
-
         products[0] = new Chromosome(this.customers, list0);
-
         Collections.shuffle(newList);
-
         ArrayList list1 = new ArrayList<SignalTower>(newList.subList(0,this.signalTowers.size()));
-
         products[1] = new Chromosome(this.customers, list1);
-
         return products;
 
     }

@@ -60,7 +60,7 @@ public class Genetic {
     }
 
     /**
-     * Genedik algoritmalarda başta rastgele belirlenen populasyonun jenerasyonlara etkisi büyüktür. Şans eseri
+     * Genetik algoritmalarda başta rastgele belirlenen populasyonun jenerasyonlara etkisi büyüktür. Şans eseri
      * çok kötü denk geşmiş bir popülasyonun etkileirnden kurtulabilmek için birden fazla populasyon aynı anda türetilir.
      *
      * Aynı anda birbirinden bağımsız threadNumber kadar thread çalıştırır ve hepsinin sonlanmasını bekler.
@@ -101,6 +101,7 @@ public class Genetic {
 
         System.out.println("Absolute best fitness is: "+absouluteBest);
         System.out.println((double)absouluteBest/maximumBestFitness);
+        for(SignalTower s : absoluteBestChromosome.getSignalTowers()) System.out.println(s);
     }
 
     /**
