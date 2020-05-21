@@ -173,22 +173,24 @@ public class PSO {
             int y = (int) Math.floor(tower.getLocation().getY());
             try {
                 res.setRGB(x, y, Color.RED.getRGB());
-                g.drawOval(x - RADIUS / 2, y - RADIUS / 2, RADIUS * 2, RADIUS * 2);
+                g.drawOval(x - RADIUS, y - RADIUS , RADIUS * 2, RADIUS * 2);
             } catch (Exception e) {
 //                e.printStackTrace();
                 System.out.println(e.getMessage());
                 System.out.println(x);
-                System.out.println(y);
-            }
-        }g.setColor(Color.BLUE);
+        System.out.println(y);
+        }
+        }
+        g.setColor(Color.BLUE);
         g.setBackground(Color.BLUE);
-        for (Customer customer : customers) {
-            int x = (int) Math.floor(customer.getLocation().getX());
-            int y = (int) Math.floor(customer.getLocation().getY());
+        //Bütün müşterileri mavi tek nokta olarak çizer.
+        for (Customer customer : customers){
+            int x = (int)Math.floor(customer.getLocation().getX());
+            int y = (int)Math.floor(customer.getLocation().getY());
             try {
-//                res.setRGB(x, y, Color.BLUE.getRGB());
+//                res.setRGB(x,y,Color.BLUE.getRGB());
                 g.drawOval(x - 1, y -1, 2, 2);
-            } catch (Exception e) {
+            }catch (Exception e){
 //                e.printStackTrace();
                 System.out.println(e.getMessage());
                 System.out.println(x);
